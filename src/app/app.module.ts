@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { Routes,RouterModule} from '@angular/router';
 import { FormsModule} from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -20,12 +20,12 @@ import { HousingService } from './services/housing.service';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserService } from './services/user.service';
 import { AlertifyService } from './services/alertify.service';
 import { AuthService } from './services/auth.service';
 import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortPipe } from './pipes/sort.pipe';
+import { HttpErrorInterceptorService } from './services/httperor-interceptor.service';
 
 const appRoutes:Routes = [
   {path:'',component:PropertyListComponent},
@@ -68,8 +68,12 @@ const appRoutes:Routes = [
 
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi:true
+    },
     HousingService,
-    UserService,
     AlertifyService,
     AuthService,
     PropertyDetailResolverService
