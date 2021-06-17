@@ -9,6 +9,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
@@ -65,7 +66,7 @@ const appRoutes:Routes = [
     ButtonsModule.forRoot(),
     BsDatepickerModule.forRoot(),
     NgxGalleryModule,
-
+    NgxNavbarModule
   ],
   providers: [
     {
