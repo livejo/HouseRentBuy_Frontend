@@ -36,15 +36,7 @@ export class HousingService {
         return this.http.get<Property[]>('http://localhost:64078/api/property/list/'+ SellRent.toString());
     }
     addProperty(property: Property) {
-        let newProp = [property];
-
-        // Add new property in array if newProp alreay exists in local storage
-        if (localStorage.getItem('newProp')) {
-            newProp = [property,
-                ...JSON.parse(localStorage.getItem('newProp'))];
-        }
-
-        localStorage.setItem('newProp', JSON.stringify(newProp));
+      return this.http.post('http://localhost:64078/api/property/add/',property);
     }
 
     newPropID() {
@@ -57,7 +49,7 @@ export class HousingService {
         }
     }
 
-    getPropertyAge(dateOfEstablishment: Date): string
+    getPropertyAge(dateOfEstablishment: string): string
     {
       const today = new Date();
       const estDate = new Date(dateOfEstablishment);
